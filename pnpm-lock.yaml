@@ -12,6 +12,7 @@ devDependencies:
   webpack: 5.24.4_webpack-cli@4.5.0
   webpack-cli: 4.5.0_a4b52e8bd36d006d6f783fca8be4519c
   webpack-dev-server: 3.11.2_webpack-cli@4.5.0+webpack@5.24.4
+  webpackbar: 5.0.0-3_webpack@5.24.4
 lockfileVersion: 5.2
 packages:
   /@babel/code-frame/7.12.13:
@@ -515,6 +516,15 @@ packages:
     resolution:
       integrity: sha1-y7muJWv3UK8eqzRPIpqif+lLo0g=
       tarball: ansi-colors/download/ansi-colors-4.1.1.tgz
+  /ansi-escapes/4.3.1:
+    dependencies:
+      type-fest: 0.11.0
+    dev: true
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha1-pcR8xDGB8fOP/XB2g3cA05VSKmE=
+      tarball: ansi-escapes/download/ansi-escapes-4.3.1.tgz
   /ansi-html/0.0.7:
     dev: true
     engines:
@@ -966,6 +976,11 @@ packages:
     resolution:
       integrity: sha1-I0CQ7pfH1K0aLEvq4nUF3v/GCKQ=
       tarball: chrome-trace-event/download/chrome-trace-event-1.0.2.tgz
+  /ci-info/3.1.1:
+    dev: true
+    resolution:
+      integrity: sha1-mjL87997zbbwp+HA+AmOxXiXuAo=
+      tarball: ci-info/download/ci-info-3.1.1.tgz
   /class-utils/0.3.6:
     dependencies:
       arr-union: 3.1.0
@@ -1136,6 +1151,11 @@ packages:
     resolution:
       integrity: sha1-izIIk1kwjRERFdgcrT/Oq4iPl7w=
       tarball: connect-history-api-fallback/download/connect-history-api-fallback-1.6.0.tgz
+  /consola/2.15.3:
+    dev: true
+    resolution:
+      integrity: sha1-LhH5jWpL5x/3LgvfB70j4Sy2FVA=
+      tarball: consola/download/consola-2.15.3.tgz
   /consolidate/0.15.1:
     dependencies:
       bluebird: 3.7.2
@@ -1484,6 +1504,11 @@ packages:
     resolution:
       integrity: sha1-kzoEBShgyF6DwSJHnEdIqOTHIVY=
       tarball: emoji-regex/download/emoji-regex-7.0.3.tgz
+  /emoji-regex/8.0.0:
+    dev: true
+    resolution:
+      integrity: sha1-6Bj9ac5cz8tARZT4QpY79TFkzDc=
+      tarball: emoji-regex/download/emoji-regex-8.0.0.tgz
   /emojis-list/3.0.0:
     dev: true
     engines:
@@ -1786,6 +1811,15 @@ packages:
     resolution:
       integrity: sha1-XA6aiWjokSwoZjn96XeosgnyUI4=
       tarball: faye-websocket/download/faye-websocket-0.11.3.tgz
+  /figures/3.2.0:
+    dependencies:
+      escape-string-regexp: 1.0.5
+    dev: true
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha1-YlwYvSk8YE3EqN2y/r8MiDQXRq8=
+      tarball: figures/download/figures-3.2.0.tgz
   /file-uri-to-path/1.0.0:
     dev: true
     optional: true
@@ -2475,6 +2509,13 @@ packages:
     resolution:
       integrity: sha1-o7MKXE8ZkYMWeqq5O+764937ZU8=
       tarball: is-fullwidth-code-point/download/is-fullwidth-code-point-2.0.0.tgz
+  /is-fullwidth-code-point/3.0.0:
+    dev: true
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha1-8Rb4Bk/pCz94RKOJl8C3UFEmnx0=
+      tarball: is-fullwidth-code-point/download/is-fullwidth-code-point-3.0.0.tgz
   /is-glob/3.1.0:
     dependencies:
       is-extglob: 2.1.1
@@ -3449,6 +3490,13 @@ packages:
     resolution:
       integrity: sha1-von4LYGxyG7I/fvDhQRYgnJ/k7Y=
       tarball: pretty-error/download/pretty-error-2.1.2.tgz
+  /pretty-time/1.1.0:
+    dev: true
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha1-/7dCmvq7hTXDRqNOQYc63z103Q4=
+      tarball: pretty-time/download/pretty-time-1.1.0.tgz
   /process-nextick-args/2.0.1:
     dev: true
     resolution:
@@ -4109,6 +4157,13 @@ packages:
     resolution:
       integrity: sha1-Fhx9rBd2Wf2YEfQ3cfqZOBR4Yow=
       tarball: statuses/download/statuses-1.5.0.tgz
+  /std-env/2.3.0:
+    dependencies:
+      ci-info: 3.1.1
+    dev: true
+    resolution:
+      integrity: sha1-ZtSkpNUiQkLtjkP11lz6kJUhbu4=
+      tarball: std-env/download/std-env-2.3.0.tgz
   /string-width/2.1.1:
     dependencies:
       is-fullwidth-code-point: 2.0.0
@@ -4130,6 +4185,17 @@ packages:
     resolution:
       integrity: sha1-InZ74htirxCBV0MG9prFG2IgOWE=
       tarball: string-width/download/string-width-3.1.0.tgz
+  /string-width/4.2.2:
+    dependencies:
+      emoji-regex: 8.0.0
+      is-fullwidth-code-point: 3.0.0
+      strip-ansi: 6.0.0
+    dev: true
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha1-2v1PlVmnWFz7pSnGoKT3NIjr1MU=
+      tarball: string-width/download/string-width-4.2.2.tgz
   /string_decoder/1.1.1:
     dependencies:
       safe-buffer: 5.1.2
@@ -4276,6 +4342,11 @@ packages:
     resolution:
       integrity: sha1-E4zfIcXjEAsbPd/d9yCWL4i63NI=
       tarball: terser/download/terser-5.6.0.tgz
+  /text-table/0.2.0:
+    dev: true
+    resolution:
+      integrity: sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
+      tarball: text-table/download/text-table-0.2.0.tgz
   /thunky/1.1.0:
     dev: true
     resolution:
@@ -4336,6 +4407,13 @@ packages:
     resolution:
       integrity: sha1-2mCGDxwuyqVwOrfTm8Bba/mIuXo=
       tarball: tslib/download/tslib-2.1.0.tgz
+  /type-fest/0.11.0:
+    dev: true
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha1-l6vwhyMQ/tiKXEZrJWgVdhReM/E=
+      tarball: type-fest/download/type-fest-0.11.0.tgz
   /type-is/1.6.18:
     dependencies:
       media-typer: 0.3.0
@@ -4713,6 +4791,25 @@ packages:
     resolution:
       integrity: sha1-N9jPlYQd0jyAnqApMSlLNFXXSlk=
       tarball: webpack/download/webpack-5.24.4.tgz?cache=0&sync_timestamp=1615205347406&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fwebpack%2Fdownload%2Fwebpack-5.24.4.tgz
+  /webpackbar/5.0.0-3_webpack@5.24.4:
+    dependencies:
+      ansi-escapes: 4.3.1
+      chalk: 4.1.0
+      consola: 2.15.3
+      figures: 3.2.0
+      pretty-time: 1.1.0
+      std-env: 2.3.0
+      text-table: 0.2.0
+      webpack: 5.24.4_webpack-cli@4.5.0
+      wrap-ansi: 7.0.0
+    dev: true
+    engines:
+      node: '>=10'
+    peerDependencies:
+      webpack: 3 || 4 || 5
+    resolution:
+      integrity: sha1-9Plsj7EwAbK7E0glLbTJgKuTqqw=
+      tarball: webpackbar/download/webpackbar-5.0.0-3.tgz
   /websocket-driver/0.7.4:
     dependencies:
       http-parser-js: 0.5.3
@@ -4770,6 +4867,17 @@ packages:
     resolution:
       integrity: sha1-H9H2cjXVttD+54EFYAG/tpTAOwk=
       tarball: wrap-ansi/download/wrap-ansi-5.1.0.tgz
+  /wrap-ansi/7.0.0:
+    dependencies:
+      ansi-styles: 4.3.0
+      string-width: 4.2.2
+      strip-ansi: 6.0.0
+    dev: true
+    engines:
+      node: '>=10'
+    resolution:
+      integrity: sha1-Z+FFz/UQpqaYS98RUpEdadLrnkM=
+      tarball: wrap-ansi/download/wrap-ansi-7.0.0.tgz
   /wrappy/1.0.2:
     dev: true
     resolution:
@@ -4836,3 +4944,4 @@ specifiers:
   webpack: ^5.24.4
   webpack-cli: ^4.5.0
   webpack-dev-server: ^3.11.2
+  webpackbar: ^5.0.0-3
