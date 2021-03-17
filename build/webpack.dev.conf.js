@@ -1,4 +1,3 @@
-const webpack = require('webpack')
 const WebpackBar = require('webpackbar')
 const portfinder = require('portfinder')
 const { VueLoaderPlugin } = require('vue-loader')
@@ -10,11 +9,12 @@ const config = require('../config')
 
 const webpackConfig = {
   mode: 'development',
+  devtool: 'eval-cheap-module-source-map',
   entry: {
     app: './src/layout/main.js',
   },
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, '../dist'),
     filename: '[name].js',
     publicPath: '/',
   },
@@ -47,8 +47,28 @@ const webpackConfig = {
       template: './src/layout/index.html',
       inject: true,
     }),
-    new WebpackBar()
+    new WebpackBar(),
   ],
+  optimization: {
+    chunkIds: 'named',
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          chunks: 'initial',
+          minChunks: 2,
+          maxInitialRequests: 5, // The default limit is too small to showcase the effect
+          minSize: 0, // This is example is too small to create commons chunks
+        },
+        vendor: {
+          test: /node_modules/,
+          chunks: 'initial',
+          name: 'vendor',
+          priority: 10,
+          enforce: true,
+        },
+      },
+    },
+  },
   devServer: {
     contentBase: false, // 使用当前目录提供内容
     compress: true,
