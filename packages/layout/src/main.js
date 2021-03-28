@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './index.vue'
+import './assets/index.scss'
 
 new Vue({
   el: '#app',

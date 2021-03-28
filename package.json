@@ -4,9 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node --max_old_space_size=512 build/build.js",
-    "dev": "webpack serve --config ./build/webpack.dev.conf.js"
+    "test": "lerna run test --scope=layout",
+    "new-version": "lerna version --conventional-commits --yes",
+    "build": "node --max_old_space_size=512 build/build.js --mode=production",
+    "dev": "webpack serve --config ./build/webpack.dev.conf.js --progress",
+    "report": "yarn build --report",
+    "diff": "lerna diff"
   },
   "repository": {
     "type": "git",
@@ -19,25 +22,40 @@
     "url": "https://github.com/liyajie920112/liyajie-vue-cli/issues"
   },
   "homepage": "https://github.com/liyajie920112/liyajie-vue-cli#readme",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "devDependencies": {
     "@babel/core": "^7.13.10",
+    "autoprefixer": "^10.2.5",
     "babel-loader": "^8.2.2",
     "chalk": "^4.1.0",
     "css-loader": "^5.1.3",
+    "dart-sass": "^1.25.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "html-webpack-plugin": "^5.3.1",
+    "lerna": "^4.0.0",
+    "mini-css-extract-plugin": "^1.4.0",
     "ora": "^5.4.0",
     "portfinder": "^1.0.28",
+    "postcss": "^8.2.8",
+    "postcss-loader": "^5.2.0",
     "rimraf": "^3.0.2",
+    "sass-loader": "^11.0.1",
+    "style-loader": "^2.0.0",
     "vue-loader": "^15.9.6",
     "vue-style-loader": "^4.1.3",
     "vue-template-compiler": "^2.6.12",
     "webpack": "^5.24.4",
+    "webpack-bundle-analyzer": "^4.4.0",
     "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.7.3",
     "webpackbar": "^5.0.0-3"
   },
   "dependencies": {
-    "vue": "^2.6.12"
+    "vue": "^2.6.12",
+    "vue-router": "^3.5.1"
   }
 }

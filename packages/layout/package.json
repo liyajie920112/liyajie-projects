@@ -1,0 +1,12 @@
+{
+  "name": "layout",
+  "version": "1.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo test version: $npm_package_version"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -3,13 +3,21 @@ const rm = require('rimraf')
 const ora = require('ora')
 const path = require('path')
 const chalk = require('chalk')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const { merge } = require('webpack-merge');
+const webpackCommonConfig = require('./webpack.common')
+const webpackProdConfig = require('./webpack.prod.conf')
+const { formatArguments } = require('./utils')
+const argObj = formatArguments()
 
-const webpackConfig = require('./webpack.prod.conf')
+const webpackConfig = merge(webpackCommonConfig, webpackProdConfig)
+if (argObj.report) {
+  webpackConfig.plugins.push(new BundleAnalyzerPlugin())
+}
 
 const spinner = ora('buinding for production... ')
 spinner.start()
-
-rm(path.resolve(__dirname, '/dist'), err => {
+rm(path.resolve(__dirname, '../dist'), err => {
   if (err) throw err
 
   webpack(webpackConfig, (err, stats) => {
