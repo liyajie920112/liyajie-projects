@@ -32,18 +32,17 @@ const webpackCommonConfig = {
         loader: 'babel-loader',
       },
       {
-        test: /\.(sa|sc|c)ss$/,
+        test: /\.css$/,
         use: [
-          devMode
-            ? 'vue-style-loader'
-            : {
-                loader: MiniCssExtractPlugin.loader,
-                options: {
-                  esModule: false
-                },
-              },
+          'vue-style-loader',
+          'css-loader'
+        ]
+      },
+      {
+        test: /\.(sa|sc)ss$/,
+        use: [
+          'vue-style-loader',
           'css-loader',
-          'postcss-loader',
           {
             loader: 'sass-loader',
             options: {
@@ -63,42 +62,16 @@ const webpackCommonConfig = {
     }),
     new WebpackBar(),
   ],
-  optimization: {
-    chunkIds: 'named',
-    splitChunks: {
-      cacheGroups: {
-        commons: {
-          chunks: 'initial',
-          minChunks: 2,
-          maxInitialRequests: 5, // The default limit is too small to showcase the effect
-          minSize: 0, // This is example is too small to create commons chunks
-        },
-        styles: {
-          name: 'styles',
-          test: /\.css$/,
-          chunks: 'all',
-          enforce: true,
-        },
-        vendor: {
-          test: /node_modules/,
-          chunks: 'initial',
-          name: 'vendor',
-          priority: 10,
-          enforce: true,
-        },
-      },
-    },
-  },
 }
 
 const prodPlugins = [
   new MiniCssExtractPlugin({
     filename: 'css/[contenthash:8].css',
-    chunkFilename: 'css/[contenthash:8].css'
-  })
+    chunkFilename: 'css/[contenthash:8].css',
+  }),
 ]
 if (!devMode) {
-  webpackCommonConfig.optimization.chunkIds = 'natural'
+  // webpackCommonConfig.optimization.chunkIds = 'natural'
   webpackCommonConfig.plugins.push(...prodPlugins)
 }
 
