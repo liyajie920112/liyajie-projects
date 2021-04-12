@@ -1,6 +1,8 @@
 <template>
   <div class="main">
-    <p>aaaa</p>
+    <p>
+      <img :src="src" />
+    </p>
     <hello />
   </div>
 </template>
@@ -9,7 +11,12 @@
 import Hello from './components/Hello'
 export default {
   components: {
-    Hello
+    Hello,
+  },
+  data() {
+    return {
+      src: require('./assets/images/baby.jpg'),
+    }
   },
 }
 </script>

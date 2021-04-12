@@ -5,13 +5,31 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 const hash = require('hash-sum')
 
+function recursiveIssuer(m, c) {
+  const issuer = c.moduleGraph.getIssuer(m)
+  // For webpack@4 issuer = m.issuer
+
+  if (issuer) {
+    return recursiveIssuer(issuer, c)
+  }
+
+  const chunks = c.chunkGraph.getModuleChunks(m)
+  // For webpack@4 chunks = m._chunks
+
+  for (const chunk of chunks) {
+    return chunk.name
+  }
+
+  return false
+}
+
 const webpackProdConfig = {
   entry: {
     app: './packages/layout/index.js',
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: 'js/[name].js',
+    filename: 'js/[name]-[chunkhash:8].js',
     publicPath: '/',
   },
   resolve: {
@@ -28,10 +46,10 @@ const webpackProdConfig = {
           {
             loader: 'vue-loader',
             options: {
-              preserveWhitespace: false
-            }
+              preserveWhitespace: false,
+            },
           },
-        ]
+        ],
       },
       {
         test: /\.js$/,
@@ -55,6 +73,20 @@ const webpackProdConfig = {
           },
         ],
       },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 1024,
+              esModule: false,
+              publicPath: './',
+              name: 'assets/images/[name]-[hash:8].[ext]'
+            }
+          },
+        ],
+      },
     ],
   },
   plugins: [
@@ -66,51 +98,72 @@ const webpackProdConfig = {
     }),
     new WebpackBar(),
     new MiniCssExtractPlugin({
-      filename: 'css/[name].css',
-      // chunkFilename: 'css/[contenthash:8].css',
+      filename: 'css/[name]-[contenthash:8].css',
+      // chunkFilename: 'css/[name]-[chunkhash:8].css',
     }),
   ],
   optimization: {
     minimize: true,
     splitChunks: {
+      chunks: 'all',
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 5,
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
           enforce: true,
-          // chunks: 'initial',
+          reuseExistingChunk: true, // 重用已存在的chunk, 默认就是true
+          chunks: 'all',
+          priority: -10,
           name(module, chunks, cacheGroupKey) {
-            console.log('module:' + hash(module.identifier()));
-
-            const moduleFileName = module
-              .identifier()
-              .split('/')
-              .reduceRight((item) => item);
-            const allChunksNames = chunks.map((item) => item.name).join('~');
-            return `${cacheGroupKey}-${allChunksNames}-${moduleFileName}`;
+            return `${cacheGroupKey}`
+          },
+          filename: (pathData) => {
+            return `vendor/${pathData.chunk.name}-${pathData.chunk.hash.slice(
+              0,
+              9
+            )}-bundle.js`
           },
         },
-        main: {
-          test: /src/,
-          enforce: true,
-          // chunks: 'initial',
+        css: {
           name(module, chunks, cacheGroupKey) {
-            console.log('module----:' + hash(module.identifier()));
-            const n = hash(module.identifier())
-            const moduleFileName = module
-            .identifier()
-            .split('/')
-            .reduceRight((item) => item);
-            const allChunksNames = chunks.map((item) => item.name).join('~');
-            return n // cacheGroupKey + "-" + moduleFileName;
-          }
-        }
-      }
+            return cacheGroupKey
+          },
+          // type: 'css/mini-extract',
+          chunks: 'all',
+          enforce: true,
+          test: (m, c, entry) => {
+            // 提取css
+            return m.constructor.name === 'CssModule'
+          },
+        },
+        js: {
+          test: (m, c, entry) => {
+            // 提取js
+            return m.constructor.name === 'NormalModule'
+          },
+          enforce: true,
+          filename: '[name]-[chunkhash:8].js',
+          chunks: 'all',
+          priority: -20,
+          minChunks: 1,
+          reuseExistingChunk: true,
+          name(module, chunks, cacheGroupKey) {
+            const arr = module.identifier().split('/')
+            const packagesIndex = arr.findIndex((a) => a === 'packages')
+            const n = arr[packagesIndex + 1] || cacheGroupKey
+            return `${cacheGroupKey}-${n}`
+          },
+        },
+      },
     },
     chunkIds: 'named',
+    mergeDuplicateChunks: true, // 合并重复的模块
     runtimeChunk: {
-      name: 'runtime'
-    }
-  }
+      name: 'runtime',
+    },
+  },
 }
 
 module.exports = webpackProdConfig

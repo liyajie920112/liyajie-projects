@@ -1,7 +1,6 @@
 const WebpackBar = require('webpackbar')
 const { VueLoaderPlugin } = require('vue-loader')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 const argObj = require('./utils').formatArguments()
 const devMode = argObj.mode !== 'production'
@@ -33,10 +32,7 @@ const webpackCommonConfig = {
       },
       {
         test: /\.css$/,
-        use: [
-          'vue-style-loader',
-          'css-loader'
-        ]
+        use: ['vue-style-loader', 'css-loader'],
       },
       {
         test: /\.(sa|sc)ss$/,
@@ -51,6 +47,20 @@ const webpackCommonConfig = {
           },
         ],
       },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 1024,
+              esModule: false,
+              publicPath: './',
+              name: 'assets/images/[name]-[hash:8].[ext]'
+            }
+          },
+        ],
+      },
     ],
   },
   plugins: [
@@ -62,17 +72,6 @@ const webpackCommonConfig = {
     }),
     new WebpackBar(),
   ],
-}
-
-const prodPlugins = [
-  new MiniCssExtractPlugin({
-    filename: 'css/[contenthash:8].css',
-    chunkFilename: 'css/[contenthash:8].css',
-  }),
-]
-if (!devMode) {
-  // webpackCommonConfig.optimization.chunkIds = 'natural'
-  webpackCommonConfig.plugins.push(...prodPlugins)
 }
 
 module.exports = webpackCommonConfig
