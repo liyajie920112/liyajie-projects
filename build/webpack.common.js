@@ -9,6 +9,7 @@ const webpackCommonConfig = {
   entry: {
     app: './packages/layout/index.js',
   },
+  target: 'web',
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: '[chunkhash:8].js',
@@ -32,19 +33,26 @@ const webpackCommonConfig = {
       },
       {
         test: /\.css$/,
-        use: ['vue-style-loader', 'css-loader'],
+        use: ['vue-style-loader', 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.(sa|sc)ss$/,
         use: [
           'vue-style-loader',
           'css-loader',
+          'postcss-loader',
           {
             loader: 'sass-loader',
             options: {
               implementation: require('dart-sass'),
             },
           },
+          {
+            loader: 'sass-resources-loader',
+            options: {
+              resources: ['./packages/layout/src/assets/variable.scss']
+            }
+          }
         ],
       },
       {

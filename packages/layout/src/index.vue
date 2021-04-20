@@ -1,9 +1,10 @@
 <template>
-  <div class="main">
-    <p>
-      <img :src="src" />
-    </p>
-    <hello />
+  <div class="lyj-main">
+    <div class="lyj-header">11123</div>
+    <div class="lyj-container">
+      <div class="lyj-side"></div>
+      <div class="lyj-content"></div>
+    </div>
   </div>
 </template>
 
@@ -22,8 +23,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.main {
-  background-color: #f00;
-  border: 1px solid #0094ff;
+.lyj-main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  .lyj-header {
+    height: 50px;
+    background-color: $liyajie-primary-color;
+  }
+  .lyj-container {
+    flex: 1;
+    background-color: #f00;
+    display: flex;
+    .lyj-side {
+      width: 200px;
+      background-color: #ff0;
+    }
+    .lyj-content {
+      flex: 1;
+    }
+  }
 }
 </style>

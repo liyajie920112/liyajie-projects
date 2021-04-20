@@ -58,13 +58,14 @@ const webpackProdConfig = {
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.(sa|sc)ss$/,
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
+          'postcss-loader',
           {
             loader: 'sass-loader',
             options: {
@@ -82,8 +83,8 @@ const webpackProdConfig = {
               limit: 1024,
               esModule: false,
               publicPath: './',
-              name: 'assets/images/[name]-[hash:8].[ext]'
-            }
+              name: 'assets/images/[name]-[hash:8].[ext]',
+            },
           },
         ],
       },
