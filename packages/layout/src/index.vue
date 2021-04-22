@@ -1,9 +1,21 @@
 <template>
   <div class="lyj-main">
-    <div class="lyj-header">11123</div>
+    <div class="lyj-header">
+      <span class="lyj-logo">LiYajie</span>
+    </div>
     <div class="lyj-container">
-      <div class="lyj-side"></div>
-      <div class="lyj-content"></div>
+      <div class="lyj-side">
+        <ul>
+          <li>
+            <router-link to="/canvas-table">CanvasTable</router-link>
+          </li>
+        </ul>
+      </div>
+      <div class="lyj-content">
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
+      </div>
     </div>
   </div>
 </template>
@@ -29,15 +41,20 @@ export default {
   flex-direction: column;
   .lyj-header {
     height: 50px;
-    background-color: $liyajie-primary-color;
+    border-bottom: 1px solid $lyj-layout-border-color;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    .lyj-logo {
+
+    }
   }
   .lyj-container {
     flex: 1;
-    background-color: #f00;
     display: flex;
     .lyj-side {
       width: 200px;
-      background-color: #ff0;
+      border-right: 1px solid $lyj-layout-border-color;
     }
     .lyj-content {
       flex: 1;

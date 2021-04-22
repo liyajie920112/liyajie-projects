@@ -18,8 +18,12 @@ const webpackCommonConfig = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
-      '@': path.resolve('src'),
+      '@': path.resolve('packages'),
     },
+    fallback: {
+      fs: false,
+      path: false
+    }
   },
   module: {
     rules: [
@@ -79,7 +83,7 @@ const webpackCommonConfig = {
       inject: true,
     }),
     new WebpackBar(),
-  ],
+  ]
 }
 
 module.exports = webpackCommonConfig
