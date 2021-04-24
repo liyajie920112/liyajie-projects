@@ -1,5 +1,5 @@
 <template>
-  <div>canvas table</div>
+  <div>web-excel</div>
 </template>
 
 <script>

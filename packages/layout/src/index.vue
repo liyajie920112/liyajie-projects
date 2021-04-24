@@ -6,8 +6,10 @@
     <div class="lyj-container">
       <div class="lyj-side">
         <ul>
-          <li>
-            <router-link to="/canvas-table">CanvasTable</router-link>
+          <li v-for="item in menus" :key="item.path">
+            <router-link :to="item.path">{{
+              item.meta ? item.meta.menuName : item.path
+            }}</router-link>
           </li>
         </ul>
       </div>
@@ -31,6 +33,14 @@ export default {
       src: require('./assets/images/baby.jpg'),
     }
   },
+  computed: {
+    menus() {
+      return this.$root.menus
+    },
+  },
+  mounted() {
+    console.log('this', this.$root)
+  },
 }
 </script>
 
@@ -46,7 +56,6 @@ export default {
     align-items: center;
     padding: 0 20px;
     .lyj-logo {
-
     }
   }
   .lyj-container {
@@ -55,6 +64,25 @@ export default {
     .lyj-side {
       width: 200px;
       border-right: 1px solid $lyj-layout-border-color;
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        li {
+          cursor: pointer;
+          a {
+            display: block;
+            padding: 8px 10px;
+            color: rgb(214, 69, 58);
+            text-decoration: none;
+            font-size: 14px;
+            &.router-link-active {
+              color: #fff;
+              background-color: $lyj-primary-color;
+            }
+          }
+        }
+      }
     }
     .lyj-content {
       flex: 1;
